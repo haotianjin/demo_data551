@@ -35,7 +35,7 @@ hr4["experience_level"] = pd.cut(sli, bins = bins_4, labels = lab_4)
 
 c = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-server = app.server
+server = c.server
 
 c.layout = dbc.Container([
     dbc.Tabs([
