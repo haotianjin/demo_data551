@@ -33,11 +33,11 @@ hr4.experience.replace("None",23, inplace = True)
 sli = hr4.experience.astype(int)
 hr4["experience_level"] = pd.cut(sli, bins = bins_4, labels = lab_4)
 
-c = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-server = c.server
+server = app.server
 
-c.layout = dbc.Container([
+app.layout = dbc.Container([
     dbc.Tabs([
         dbc.Tab([
             html.Br(),
@@ -139,7 +139,7 @@ c.layout = dbc.Container([
     ])
 ])
 
-@c.callback(
+@app.callback(
     Output("chart1", "srcDoc"),
     Input("dropdown1", "value"),
     Input("dropdown2", "value"))
@@ -158,7 +158,7 @@ def plot_chart1(edu, edu2):
     chart = chart.add_selection(click)
     return chart.to_html()
 
-@c.callback(
+@app.callback(
     Output("chart2", "srcDoc"),
     Input("radio_items", "value"))
 
@@ -184,7 +184,7 @@ def plot_chart2(size):
     chart = detail & full
     return chart.to_html()
 
-@c.callback(
+@app.callback(
     Output("chart3", "srcDoc"),
     Input("rangeslider1", "value"))
 
@@ -203,7 +203,7 @@ def plot_chart3(range_val):
     chart = chart.add_selection(click)
     return chart.to_html()
 
-@c.callback(
+@app.callback(
     Output("chart4", "srcDoc"),
     Input("dropdown3", "value")
 )
@@ -222,4 +222,4 @@ def plot_chart4(level):
     return chart.to_html()
 
 if __name__ == "__main__":
-    c.run_server(debug = True)
+    app.run_server(debug = True)
